@@ -5,12 +5,12 @@ High-level example usage of the Nix manipulator library.
 
 import sys
 
-from pygments.lexers import NixLexer, PythonLexer
 
 from nix_manipulator.cli import build_parser
 from nix_manipulator.expressions import NixSourceCode
 from nix_manipulator.manipulations import remove_value, set_value
 from nix_manipulator.parser import parse
+from nix_manipulator.serializer import serialize
 
 
 def main(args=None):
@@ -44,6 +44,11 @@ def main(args=None):
                 return "OK"
             else:
                 return "Fail"
+        case "serialize":
+            return serialize(
+                file=args.file,
+                output=args.output,
+            )
         case _:
             parser.print_help(sys.stderr)
 

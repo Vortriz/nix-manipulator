@@ -46,4 +46,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     with_file_argument(test_parser)
 
+    serialize_parser = subparsers.add_parser(
+        "serialize", help="Flatten Nix attributes from a file"
+    )
+    serialize_parser.add_argument("file", help="Path to the Nix file to process")
+    serialize_parser.add_argument(
+        "-o",
+        "--output",
+        choices=["json", "text"],
+        default="text",
+        help="Output format (default: text)",
+    )
+
     return parser

@@ -1,18 +1,7 @@
-#!/usr/bin/env python3
-"""
-nix-attrs-flatten.py – emit a dict that maps each leaf attribute to its value,
-including function names along the path, e.g.
-
-    {"stdenv.mkDerivation.src.fetchFromGitHub.hash": "sha256-…", …}
-
-Requires py-tree-sitter ≥ 0.23 and tree_sitter_nix.
-"""
-
-import argparse
 import json
 import re
 from pathlib import Path
-from typing import Any, Union
+from typing import Any
 
 import tree_sitter_nix as ts_nix
 from tree_sitter import Language, Parser
@@ -205,27 +194,16 @@ def flatten_nix_file(file_path: Path) -> dict[str, str]:
     return attributes
 
 
-def main():
-    """Main CLI entry point."""
-    parser = argparse.ArgumentParser(description="Flatten Nix attributes from a file")
-    parser.add_argument("file", help="Path to the Nix file to process")
-    parser.add_argument(
-        "-o",
-        "--output",
-        choices=["json", "text"],
-        default="text",
-        help="Output format (default: text)",
-    )
-    args = parser.parse_args()
-
+def serialize(file: str, output: str) -> None:
+    """CLI entry point."""
     # Process file
-    raw_attributes = flatten_nix_file(Path(args.file))
+    raw_attributes = flatten_nix_file(Path(file))
     processed_attributes = {
         key: parse_nix_value(value) for key, value in raw_attributes.items()
     }
 
     # Output results
-    if args.output == "json":
+    if output == "json":
         print(json.dumps(processed_attributes, indent=2))
     else:
         for key, value in sorted(processed_attributes.items()):
@@ -240,7 +218,3 @@ def debug_ast(node, code: bytes, indent=0):
 
     for child in node.children:
         debug_ast(child, code, indent + 1)
-
-
-if __name__ == "__main__":
-    main()
