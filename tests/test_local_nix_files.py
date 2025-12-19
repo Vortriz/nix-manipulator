@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from nix_manipulator.parser import parse
+from nima.parser import parse
 from tests.expressions.trl import nixpkgs_trl_default
 
 NIX_FILES_PATH = Path(__file__).parent

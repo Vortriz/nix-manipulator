@@ -1,4 +1,4 @@
-from nix_manipulator.parser import parse
+from nima.parser import parse
 
 source_package = """
 {

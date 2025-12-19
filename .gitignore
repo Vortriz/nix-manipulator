@@ -1,7 +1,9 @@
-/.idea
-/result
-/.coverage
-__pycache__
-*.pyc
-
+# Nix
 .direnv/
+result*
+
+# Python
+.venv
+**/__marimo__/session
+**/__pycache__
+.ruff_cache

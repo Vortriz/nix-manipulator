@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from nix_manipulator.__main__ import main
+from nima import main
 
 
 def test_cli_set_boolean(capsys):

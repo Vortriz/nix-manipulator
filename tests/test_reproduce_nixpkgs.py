@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from nix_manipulator.parser import parse
+from nima.parser import parse
 
 
 def get_nixpkgs_path() -> Path | None:

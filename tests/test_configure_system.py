@@ -1,7 +1,7 @@
 # These tests demonstrate how to use nix-manipulator to modify a NixOS system configuration.
 
-from nix_manipulator.expressions import Identifier
-from nix_manipulator.parser import parse
+from nima.expressions import Identifier
+from nima.parser import parse
 
 nixos_configuration = """
 { pkgs, ... }: {

@@ -1,14 +1,14 @@
-from nix_manipulator.expressions.binding import Binding
-from nix_manipulator.expressions.comment import Comment, MultilineComment
-from nix_manipulator.expressions.function.call import FunctionCall
-from nix_manipulator.expressions.function.definition import FunctionDefinition
-from nix_manipulator.expressions.identifier import Identifier
-from nix_manipulator.expressions.layout import empty_line
-from nix_manipulator.expressions.let import LetExpression
-from nix_manipulator.expressions.list import NixList
-from nix_manipulator.expressions.primitive import Primitive
-from nix_manipulator.expressions.set import AttributeSet
-from nix_manipulator.expressions.with_statement import WithStatement
+from nima.expressions.binding import Binding
+from nima.expressions.comment import Comment, MultilineComment
+from nima.expressions.function.call import FunctionCall
+from nima.expressions.function.definition import FunctionDefinition
+from nima.expressions.identifier import Identifier
+from nima.expressions.layout import empty_line
+from nima.expressions.let import LetExpression
+from nima.expressions.list import NixList
+from nima.expressions.primitive import Primitive
+from nima.expressions.set import AttributeSet
+from nima.expressions.with_statement import WithStatement
 
 nixpkgs_trl_default = FunctionDefinition(
     argument_set=[

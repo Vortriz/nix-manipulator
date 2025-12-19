@@ -1,4 +1,4 @@
-from nix_manipulator.parser import parse
+from nima.parser import parse
 
 
 def parse_and_rebuild(source: str):
