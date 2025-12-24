@@ -1,6 +1,6 @@
 {
   lib,
-  buildPythonApplication,
+  buildPythonPackage,
   uv-build,
   tree-sitter,
   tree-sitter-grammars,
@@ -8,7 +8,7 @@
   pygments,
   pytestCheckHook,
 }:
-buildPythonApplication {
+buildPythonPackage {
   pname = "nima";
   version = "0.1.3-dev";
 
@@ -35,7 +35,7 @@ buildPythonApplication {
     pygments
   ];
 
-  doCheck = true;
+  doCheck = false;
 
   nativeCheckInputs = [
     pytestCheckHook

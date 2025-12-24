@@ -55,14 +55,17 @@
             name = "python";
             devshell = {
               motd = "";
-              packagesFrom = [ self.packages.${system}.default ];
             };
 
-            packages = with pkgs; [
-              uv
-              ruff
-            ]
-            ++ [ self.packages.${system}.default ];
+            packages =
+              with pkgs;
+              [
+                uv
+                ruff
+              ]
+              ++ [
+                (pkgs.python3.withPackages (_: [ self.packages.${system}.default ]))
+              ];
 
             env = [
               {

@@ -1,10 +1,20 @@
-import json
 import re
 from pathlib import Path
 from typing import Any
 
 import tree_sitter_nix as ts_nix
 from tree_sitter import Language, Parser
+
+from .expressions import NixSourceCode
+
+
+def to_nix(source: NixSourceCode) -> str:
+    """
+    Serializes a NixSourceCode object back to a Nix expression string.
+    :param source: The NixSourceCode object to serialize.
+    :return: The string representation of the Nix expression.
+    """
+    return source.rebuild()
 
 
 def extract_text(node, code: bytes) -> str:
@@ -170,8 +180,8 @@ def extract_attributes(
             results[key] = extract_text(node, code).strip()
 
 
-def flatten_nix_file(file_path: Path) -> dict[str, str]:
-    """Parse a Nix file and return flattened attributes."""
+def to_dict(file_path: Path):
+    """Parse a Nix file and return dictionary of flattened attributes."""
     source_code = file_path.read_bytes()
 
     # Set up tree-sitter parser
@@ -191,23 +201,10 @@ def flatten_nix_file(file_path: Path) -> dict[str, str]:
             if not cursor.goto_next_sibling():
                 break
 
-    return attributes
-
-
-def serialize(file: str, output: str) -> None:
-    """CLI entry point."""
-    # Process file
-    raw_attributes = flatten_nix_file(Path(file))
     processed_attributes = {
-        key: parse_nix_value(value) for key, value in raw_attributes.items()
+        key: parse_nix_value(value) for key, value in attributes.items()
     }
-
-    # Output results
-    if output == "json":
-        print(json.dumps(processed_attributes, indent=2))
-    else:
-        for key, value in sorted(processed_attributes.items()):
-            print(f"{key}: {value}")
+    return processed_attributes
 
 
 def debug_ast(node, code: bytes, indent=0):
