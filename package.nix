@@ -25,6 +25,9 @@ buildPythonPackage {
       ./pyproject.toml
       ./uv.lock
       ./README.md
+      ./COPYING
+      ./COPYING.LESSER
+      ./LICENSE
     ];
   };
 
